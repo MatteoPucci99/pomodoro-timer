@@ -1,0 +1,20 @@
+#mainContainer {
+  background-color: #7e53a3ff;
+  color: white;
+  height: 100vh;
+}
+
+#timerContent {
+  font-size: 8em;
+  font-weight: bold;
+}
+
+#buttonTimer {
+  border: none;
+  color: #7e53a3ff;
+  font-weight: bold;
+  font-size: 2em;
+  width: 200px;
+  height: 75px;
+  border-radius: 7px;
+}
