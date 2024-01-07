@@ -18,3 +18,14 @@
   height: 75px;
   border-radius: 7px;
 }
+
+.selectedType {
+  background-color: #765691ff;
+  padding: 3px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.inputModal {
+  width: 100%;
+}
