@@ -60,7 +60,7 @@ const CountDown = (props)=>{
       });
     }
     const handleClickTimer = ()=>{
-      if(isPressed){
+      if(isPressed && props.option === 'Pomodoro'){
         console.log('Invio i dati al server !')
         dispatch(saveSessionAction(session,handleTrackReset))
 

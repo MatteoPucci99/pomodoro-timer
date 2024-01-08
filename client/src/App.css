@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap");
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Outfit", sans-serif;
+}
+
+p,
+span {
+  font-family: "Inter", sans-serif;
+}
+
 #mainContainer {
   background-color: #7e53a3ff;
   color: white;
@@ -28,4 +42,48 @@
 
 .inputModal {
   width: 100%;
+}
+
+.reportButton {
+  width: 40%;
+  border: 2px solid #e09b99ff;
+  color: #e09b99ff;
+  font-weight: bold;
+  background-color: white;
+}
+
+.clickedReportButton {
+  background-color: #e09b99ff;
+  color: white;
+  font-weight: bold;
+  width: 40%;
+  border: 2px solid #e09b99ff;
+}
+
+#summaryButton {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+#detailButton {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.summaryCard {
+  background-color: #f7e7e6ff;
+  border-radius: 7px;
+  color: #d67774ff;
+  font-weight: bold;
+}
+
+.sumTextContainer p:nth-child(3) {
+  font-size: smaller;
+}
+
+.summaryIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  color: #f5a4a2ff;
 }
