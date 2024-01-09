@@ -69,6 +69,16 @@ span {
   border-bottom-right-radius: 5px;
 }
 
+#weekButton {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#monthButton {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .summaryCard {
   background-color: #f7e7e6ff;
   border-radius: 7px;

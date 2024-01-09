@@ -22,7 +22,7 @@ const NavSection= ()=>{
         <Container>
             <Row className="justify-content-between">
                 <Col className="col-6 d-flex align-items-center">
-                    <GiTomato style={{fontSize:'2em'}} className="me-2" /><h3 className="mb-0">TOMATO TIMER</h3>
+                    <GiTomato style={{fontSize:'2em'}} className="me-2" /><h3 className="mb-0 fw-bold">TOMATO TIMER</h3>
                 </Col>
                 <Col className="col-4 d-flex">
                     <div className="d-flex align-items-center justify-content-center py-1 px-3 me-2" style={{cursor:'pointer', backgroundColor:'#8b63abff'}} onClick={handleShowModal2}>

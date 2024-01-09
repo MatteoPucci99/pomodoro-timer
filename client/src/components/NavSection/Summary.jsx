@@ -3,10 +3,14 @@ import { CiClock2 } from "react-icons/ci";
 import { IoCalendarOutline } from "react-icons/io5";
 import { BsFire } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import FocushoursChart from "./FocushoursChart";
 
 
 const Summary = ()=>{
-
+    
+    const [isSelected, setIsSelected] = useState('Week')
+    const handleSelectedButton = (input)=>setIsSelected(input)
     const session = useSelector(state=>state.sessions.content)
 
     const totalSeconds = session.reduce((acc,session) => acc + session.seconds, 0);
@@ -34,15 +38,15 @@ const Summary = ()=>{
           }
         }
       
-        return consecutiveDaysCount + 1;
+        return consecutiveDaysCount ;
       }
-    
+
       const consecutiveDays = countConsecutiveDays(sessionDates);
     
 
     return (
        <Container>
-        <Row>
+        <Row className="row-cols-1">
             <Col>
                 <span className="fw-bold fs-5">Activity Summary</span>
                 <Row className="mt-3">
@@ -68,6 +72,19 @@ const Summary = ()=>{
                         </div>
                     </Col>
                 </Row>
+            </Col>
+            <Col className="mt-4">
+                <span className="fw-bold fs-5">Focus Hours</span>
+                <Row className="row-cols-1">
+                    <Col className="text-center mt-3">
+                        <button className={isSelected === 'Week' ? 'clickedReportButton' : 'reportButton'} id="weekButton" onClick={()=>handleSelectedButton('Week')}>Week</button>
+                        <button className={isSelected === 'Month' ? 'clickedReportButton' : 'reportButton'} id="monthButton"  onClick={()=>handleSelectedButton('Month')}>Month</button>
+                    </Col>
+                    <Col>
+                        <FocushoursChart/>
+                    </Col>
+                </Row>
+
             </Col>
         </Row>
        </Container>
