@@ -112,7 +112,7 @@ const Detail = ()=>{
                             {indexPage}                        
                         </Col>
                         <Col className="text-center">
-                            <GrNext onClick={handleNext} style={{cursor:'pointer'}}/>    
+                            {endIndex < sessionsByDay.length && (<GrNext onClick={handleNext} style={{cursor:'pointer'}}/>)}    
                         </Col>
                     </Row>
                 </Col>
