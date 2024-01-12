@@ -19,14 +19,15 @@ const Summary = ()=>{
     const sessionDates = session.map(session=> session.date.split('T')[0])
     const uniqueDate = new Set(sessionDates)
     const daysCount = uniqueDate.size
-
+    const uniqueDateList = [...uniqueDate]
+  
     const countConsecutiveDays =(dates) => {
         let consecutiveDaysCount = 1;
       
         for (let i = 1; i < dates.length; i++) {
           const currentDate = new Date(dates[i]);
           const previousDate = new Date(dates[i - 1]);
-      
+        
           if (
             currentDate.getDate() === previousDate.getDate() + 1 &&
             currentDate.getMonth() === previousDate.getMonth() &&
@@ -41,7 +42,9 @@ const Summary = ()=>{
         return consecutiveDaysCount ;
       }
 
-      const consecutiveDays = countConsecutiveDays(sessionDates);
+      const consecutiveDays = countConsecutiveDays(uniqueDateList);
+
+      
     
 
     return (
@@ -81,7 +84,7 @@ const Summary = ()=>{
                         <button className={isSelected === 'Month' ? 'clickedReportButton' : 'reportButton'} id="monthButton"  onClick={()=>handleSelectedButton('Month')}>Month</button>
                     </Col>
                     <Col>
-                        <FocushoursChart/>
+                        <FocushoursChart selected={isSelected}/>
                     </Col>
                 </Row>
 

@@ -27,3 +27,25 @@ export const getSavedSessions = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const deleteSession = async (req, res) => {
+  const { id: _id } = req.params;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(_id))
+      return res.status(400).json({ message: "Id sessione non valido" });
+
+    await Session.findByIdAndDelete(_id);
+
+    res.json({ message: "Sessione rimossa con successo" });
+  } catch (error) {
+    console.error("Errore durante l'eliminazione della sessione:", error);
+
+    res
+      .status(500)
+      .json({
+        message:
+          "Errore interno del server durante l'eliminazione della sessione",
+      });
+  }
+};

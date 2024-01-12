@@ -5,7 +5,7 @@ import ReactApexChart from "react-apexcharts"
 import { useEffect, useState } from "react";
 
 
-const FocushoursChart = ()=>{
+const FocushoursChart = (props)=>{
 
     const sessions = useSelector((state) => state.sessions.content);
     const [dati,setDati] = useState()
@@ -68,11 +68,15 @@ const sessionsByDay = sessions.reduce((result, session) => {
     return result;
   }, []);
 
-    const dataForChart = sessionsByDay.map(el=>(el.totalSeconds/3600).toFixed(2))
-    const xData = sessionsByDay.map(el=> format(el.startDate, 'd-MMM', { locale: it }));
-    const numToShow = 7;
-    const xDataToShow = xData.slice(-numToShow);
-    const dataForChartToShow = dataForChart.slice(-numToShow)
+
+
+  const selectedSessions = props.selected === 'Week' ? sessionsByDay : sessionsByWeek;
+
+  const dataForChart = selectedSessions.map(el => (el.totalSeconds / 3600).toFixed(2))
+  const xData = selectedSessions.map(el => format(el.startDate, 'd-MMM', { locale: it }));
+  const numToShow = props.selected === 'Week' ? 7 : 4;
+  const xDataToShow = xData.slice(-numToShow);
+  const dataForChartToShow = dataForChart.slice(-numToShow)
    
     useEffect(()=>{
       setDati({
@@ -132,7 +136,7 @@ const sessionsByDay = sessions.reduce((result, session) => {
       
       
       })
-    },[])
+    },[props.selected])
   
  
  
