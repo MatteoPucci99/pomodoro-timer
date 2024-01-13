@@ -47,7 +47,7 @@ const Timer = ()=>{
                         </div>
                     </Col>
                     <Col className="mt-3">
-                        <CountDown timerSettings={timerSettings} option={selected}/>
+                        <CountDown timerSettings={timerSettings} option={selected} handleSelected={handleSelected}/>
                     </Col>
                 </Row>
             </Container>

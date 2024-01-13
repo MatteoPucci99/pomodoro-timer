@@ -36,6 +36,12 @@ const CountDown = (props)=>{
             if (minutes === 0) {
               clearInterval(timer);
               // Fai qualcosa quando il timer raggiunge zero
+              props.handleSelected('ShortBreak')
+              setIsPressed(false)
+              setIsRunning(false)
+              setMinutes(props.timerSettings)
+              setSeconds(0)
+              dispatch(saveSessionAction(session, handleTrackReset))
             } else {
               setMinutes((prevMinutes) => prevMinutes - 1);
               setSeconds(59);

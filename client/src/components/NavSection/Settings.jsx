@@ -1,23 +1,25 @@
 import { useState } from "react"
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setSettingsAction } from "../../redux/actions"
 
 
 const Settings = (props)=>{
 
-   const dispatch = useDispatch()
+    const initialSettings = useSelector(state=>state.settings.content)
+    const dispatch = useDispatch()
     const [settings,setSettings] = useState({
-        Pomodoro: null,
-        ShortBreak: null,
-        LongBreak: null,
+        Pomodoro: initialSettings.Pomodoro,
+        ShortBreak: initialSettings.ShortBreak,
+        LongBreak: initialSettings.LongBreak,
     })
 
-    const handleInputChange  = (e,field)=>{
-        setSettings({
-            ...settings, [field]: e.target.value
-        })
-
+    const handleInputChange  = (e,field)=>{   
+        if(e.target.value > 0){
+            setSettings({
+                ...settings, [field]: e.target.value
+            })
+        }
     }
 
     const handleForm = (e)=>{
@@ -38,15 +40,15 @@ const Settings = (props)=>{
                         <Row>
                             <Col>
                                 <label className="fw-bold text-secondary">Pomodoro</label>
-                                <input className="inputModal" type="number" onChange={(e)=>handleInputChange(e,'Pomodoro')}></input>
+                                <input className="inputModal" type="number" value={settings.Pomodoro} onChange={(e)=>handleInputChange(e,'Pomodoro')}></input>
                             </Col>
                             <Col>
                                 <label className="fw-bold text-secondary">Short Break</label>
-                                <input  className="inputModal" type="number" onChange={(e)=>handleInputChange(e,'ShortBreak')}></input>
+                                <input  className="inputModal" type="number" value={settings.ShortBreak} onChange={(e)=>handleInputChange(e,'ShortBreak')}></input>
                             </Col>
                             <Col>
                                 <label className="fw-bold text-secondary">Long Break</label>
-                                <input className="inputModal" type="number" onChange={(e)=>handleInputChange(e,'LongBreak')}></input>
+                                <input className="inputModal" type="number" value={settings.LongBreak} onChange={(e)=>handleInputChange(e,'LongBreak')}></input>
                             </Col>
                         </Row>
                     </Container>
