@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import {  Col, Container, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { saveSessionAction } from "../../redux/actions";
+import { IoPlaySkipForward } from "react-icons/io5";
+
 
 
 const CountDown = (props)=>{
@@ -72,6 +74,15 @@ const CountDown = (props)=>{
 
       }
     }
+
+    const handleArrowSwitch = ()=>{
+      props.handleSelected('ShortBreak')
+      setIsPressed(false)
+      setIsRunning(false)
+      dispatch(saveSessionAction(session, handleTrackReset))
+    }
+   
+
   
 
     return (
@@ -80,12 +91,13 @@ const CountDown = (props)=>{
                 <Col>
                     <span id="timerContent">{`${formatTime(minutes)}:${formatTime(seconds)}`}</span>
                 </Col>
-                <Col>
+                <Col className='position-relative'>
                     <button onClick={()=>{handleTimer();handlePressButton();handleClickTimer()}} id="buttonTimer" style={{borderBottom: isPressed ? 'none' : '6px solid #cecece'}}>
                         {isRunning ? 'PAUSE' : 'START'}
                     </button>
+                    {isRunning && props.option === 'Pomodoro' && (<IoPlaySkipForward style={{fontSize:'2em', cursor:'pointer'}} className='position-absolute ms-5 top-50' onClick={handleArrowSwitch} />)}
                 </Col>
-
+        
             </Row>
         </Container>
         
