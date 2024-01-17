@@ -19,7 +19,7 @@ span {
 }
 
 #timerContent {
-  font-size: 8em;
+  font-size: 6em;
   font-weight: bold;
 }
 
@@ -38,6 +38,9 @@ span {
   padding: 3px 15px;
   border-radius: 5px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inputModal {
@@ -100,4 +103,23 @@ span {
 
 .borderCol {
   border-bottom: 1px solid rgb(203, 203, 203);
+}
+
+.fontColTimer {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1800px) and (max-width: 2000px) {
+  #content {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  #content {
+    width: 40%;
+  }
 }

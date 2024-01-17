@@ -24,13 +24,15 @@ const NavSection= ()=>{
                 <Col className="col-6 d-flex align-items-center">
                     <GiTomato style={{fontSize:'2em'}} className="me-2" /><h3 className="mb-0 fw-bold">TOMATO TIMER</h3>
                 </Col>
-                <Col className="col-4 d-flex">
-                    <div className="d-flex align-items-center justify-content-center py-1 px-3 me-2" style={{cursor:'pointer', backgroundColor:'#8b63abff'}} onClick={handleShowModal2}>
-                        <BiSolidBarChartSquare className="me-1" style={{fontSize:'1.3em'}} /><span>Report</span>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-center py-1 px-3" style={{cursor:'pointer', backgroundColor:'#8b63abff'}} onClick={handleShowModal} >
-                        <IoIosSettings className="me-1" style={{fontSize:'1.3em'}}  /><span>Setting</span>
-                    </div>
+                <Col className="col-4">
+                    <Row>
+                        <Col className="d-flex align-items-center justify-content-center py-1 px-2 me-1 me-md-3" style={{cursor:'pointer', backgroundColor:'#8b63abff'}} onClick={handleShowModal2}>
+                            <BiSolidBarChartSquare  style={{fontSize:'1.3em'}} /><span className="d-none d-md-flex">Report</span>
+                        </Col>
+                        <Col className="d-flex align-items-center justify-content-center py-1 px-2" style={{cursor:'pointer', backgroundColor:'#8b63abff'}} onClick={handleShowModal} >
+                            <IoIosSettings style={{fontSize:'1.3em'}}  /><span className="d-none d-md-flex">Setting</span>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
             <Row>

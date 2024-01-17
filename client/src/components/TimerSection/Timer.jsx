@@ -32,34 +32,36 @@ const Timer = ()=>{
     const handleSelected = (input) => setSelected(input)
 
     return (
-        <>
-            <Container className="d-flex justify-content-center py-4" style={{backgroundColor:'#8b63abff', borderRadius: '7px'}}>
-                <Row className="row-cols-1 justify-content-center flex-column">
-                    <Col className="d-flex justify-content-evenly align-items-center">
-                        <div onClick={()=>{handleSettings(settings.Pomodoro); handleSelected('Pomodoro')}} style={{cursor:'pointer', width:'25%'}} className={selected ==='Pomodoro' ? 'selectedType' : null}>
-                            Pomodoro
-                        </div>
-                        <div onClick={()=>{handleSettings(settings.ShortBreak); handleSelected('ShortBreak')}} style={{cursor:'pointer', width:'25%'}} className={selected ==='ShortBreak' ? 'selectedType' : null}>
-                            Short Break
-                        </div>
-                        <div onClick={()=>{handleSettings(settings.LongBreak); handleSelected('LongBreak')}} style={{cursor:'pointer', width:'25%'}} className={selected ==='LongBreak' ? 'selectedType' : null}>
-                            Long Break
-                        </div>
+        <Container className="d-flex justify-content-center py-4 flex-column" style={{backgroundColor:'#8b63abff', borderRadius: '7px'}}>
+                <Row className="row-cols-1 justify-content-center">
+                    <Col>
+                        <Row className="justify-content-evenly">
+                            <Col xs={3} md={2} onClick={()=>{handleSettings(settings.Pomodoro); handleSelected('Pomodoro')}} style={{cursor:'pointer'}} className={selected ==='Pomodoro' ? 'selectedType fontColTimer' : 'fontColTimer'}>
+                                Pomodoro
+                            </Col>
+                            <Col xs={3} md={2} onClick={()=>{handleSettings(settings.ShortBreak); handleSelected('ShortBreak')}} style={{cursor:'pointer'}} className={selected ==='ShortBreak' ? 'selectedType fontColTimer' : 'fontColTimer'}>
+                                Short Break
+                            </Col>
+                            <Col xs={3} md={2} onClick={()=>{handleSettings(settings.LongBreak); handleSelected('LongBreak')}} style={{cursor:'pointer'}} className={selected ==='LongBreak' ? 'selectedType fontColTimer' : 'fontColTimer'}>
+                                Long Break
+                            </Col>
+
+                        </Row>
                     </Col>
                     <Col className="mt-3">
                         <CountDown timerSettings={timerSettings} option={selected} handleSelected={handleSelected}/>
                     </Col>
                 </Row>
-            </Container>
-            <Container>
+
                 <Row>
                     <Col className="fw-bold mt-4 fs-4" >
                         {selected === 'Pomodoro' ? <span>Time to focus !</span> : <span>Time for a break !</span>}
                     </Col>
                 </Row>
             </Container>
+           
 
-        </>
+        
     )
 }
 
