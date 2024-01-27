@@ -5,7 +5,7 @@ Un'applicazione basata sulla tecnica del Pomodoro: un efficace metodo di gestion
 
 FUNZIONALITA':
 
-START/PAUSE: Avvia o interrompi il timer. Nel caso in cui il timer sia impostato su "Pomodoro", la sessione di produttività verrà salvata in uno stato locale e inviata al server al termine del timer (Switch PAUSE to START).
+START/PAUSE: Avvia o interrompi il timer. Nel caso in cui il timer sia impostato su "Pomodoro", la sessione di produttività verrà salvata in uno stato locale e inviata al server al termine del timer (PAUSE to START).
 
 SETTING: Personalizza il timer selezionando la durata dei periodi di focus, di pausa breve e lunga.
 
