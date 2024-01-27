@@ -3,7 +3,7 @@ POMODORO TIMER CLONE
 
 Un'applicazione basata sulla tecnica del Pomodoro: un efficace metodo di gestione del tempo che suddivide il lavoro in intervalli tradizionalmente di 25 minuti, separati da brevi pause.
 
-FUNZIONALITA';
+FUNZIONALITA':
 
 START/PAUSE: Avvia o interrompi il timer. Nel caso in cui il timer sia impostato su "Pomodoro", la sessione di produttività verrà salvata in uno stato locale e inviata al server al termine del timer (PAUSE -> START).
 
