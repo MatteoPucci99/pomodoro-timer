@@ -16,7 +16,6 @@ function App() {
             <Col className="text-center mt-5">
               <Timer />
             </Col>
-            <Col className="text-center mt-4">Tasks section</Col>
           </Row>
         </Col>
       </Row>

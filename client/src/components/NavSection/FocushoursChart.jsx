@@ -136,7 +136,7 @@ const sessionsByDay = sessions.reduce((result, session) => {
       
       
       })
-    },[props.selected])
+    },[props.selected,sessions])
   
  
  

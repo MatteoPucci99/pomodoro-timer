@@ -30,10 +30,10 @@ const CountDown = (props)=>{
       let timer;
       if ( isRunning && minutes >= 0 && seconds >= 0) {
         timer = setInterval(() => {
-          setSession((prevSession) => ({
-            ...prevSession,
-            seconds: prevSession.seconds + 1
-          }));
+          setSession({
+            ...session,
+            seconds: session.seconds + 1
+          });
           if (seconds === 0) {
             if (minutes === 0) {
               clearInterval(timer);
@@ -45,11 +45,11 @@ const CountDown = (props)=>{
               setSeconds(0)
               dispatch(saveSessionAction(session, handleTrackReset))
             } else {
-              setMinutes((prevMinutes) => prevMinutes - 1);
+              setMinutes(minutes - 1);
               setSeconds(59);
             }
           } else {
-            setSeconds((prevSeconds) => prevSeconds - 1);
+            setSeconds(seconds - 1);
           }
         }, 1000);
       }

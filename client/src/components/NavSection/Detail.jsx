@@ -19,9 +19,14 @@ const Detail = ()=>{
     const [currentIndex, setCurrentIndex] = useState(0)
     const [selectedIndex, setSelectedIndex] = useState(5)
     const sessions = useSelector(state=>state.sessions.content)
+
+    const orderedDates = [...sessions].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    console.log(orderedDates)
+
     //DAY SESSION 
         // Raggruppa le sessioni per giorni con la somma dei secondi
-        const sessionsByDay = sessions.reduce((result, session) => {
+        const sessionsByDay = orderedDates.reduce((result, session) => {
         // Ottieni la data della sessione come oggetto Date
         const sessionDate = new Date(session.date);
     
@@ -46,6 +51,7 @@ const Detail = ()=>{
   
     return result;
   }, []);
+
 
 
     const endIndex = Math.min(currentIndex + selectedIndex, sessionsByDay.length);
