@@ -15,15 +15,19 @@ const Summary = ()=>{
 
     const totalSeconds = session.reduce((acc,session) => acc + session.seconds, 0);
     const totalHours = (totalSeconds / 3600).toFixed(1)
-
+    //Creo un array con solo le date (elimino l'ora)
     const sessionDates = session.map(session=> session.date.split('T')[0])
+    //Elimino i doppioni che non servono nel calcolo dei giorni consecutivi. Set è un oggetto che garantisce che ci siano solo elementi unici
     const uniqueDate = new Set(sessionDates)
+    //Con size ottengono il numero di elementi unici di un oggetto Set, quindi in questo caso i giorni totali di accesso
     const daysCount = uniqueDate.size
+    //Siccome uniqueDate è un oggetto Set posso utilizzare direttamente lo spread operator, e ottenere un array di valori
     const uniqueDateList = [...uniqueDate]
-  
+ 
+    //Funzione per calcolare i giorni di accesso, la funzione riceverà l'array di giorni unici e verificherà l'esistenza dei consecutivi.
+    //In caso non ci siano tornerà 1
     const countConsecutiveDays =(dates) => {
-        let consecutiveDaysCount = 1;
-      
+        let consecutiveDaysCount = 1;   
         for (let i = 1; i < dates.length; i++) {
           const currentDate = new Date(dates[i]);
           const previousDate = new Date(dates[i - 1]);
