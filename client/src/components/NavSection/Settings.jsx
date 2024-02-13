@@ -14,6 +14,7 @@ const Settings = (props)=>{
         LongBreak: initialSettings.LongBreak,
     })
 
+    //Funzione per gestire lo stato settings in base alle impostazioni clickate passo il field (categoria delle impostazioni) e l'evento
     const handleInputChange  = (e,field)=>{   
         if(e.target.value > 0){
             setSettings({
@@ -21,7 +22,7 @@ const Settings = (props)=>{
             })
         }
     }
-
+    //Funzione per gestire il form (impedisco il comportamento di default del form e "dispatcho" i dati salvati creando un nuovo store redux con quei settings)
     const handleForm = (e)=>{
         e.preventDefault()
         dispatch(setSettingsAction(settings))
