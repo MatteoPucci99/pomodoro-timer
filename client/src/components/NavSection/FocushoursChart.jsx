@@ -46,10 +46,10 @@ const FocushoursChart = (props)=>{
 const sessionsByDay = sessions.reduce((result, session) => {
     // Ottieni la data della sessione come oggetto Date
     const sessionDate = new Date(session.date);
-  
+    console.log(sessionDate)
     // Cerca il giorno corrispondente nel risultato
     const day = result.find((d) => isSameDay(sessionDate, d.startDate));
-  
+    
     if (day) {
       // Se il giorno esiste, aggiungi la sessione
       day.sessions.push(session);
@@ -67,6 +67,7 @@ const sessionsByDay = sessions.reduce((result, session) => {
   
     return result;
   }, []);
+  console.log(sessionsByDay)
 
 
 

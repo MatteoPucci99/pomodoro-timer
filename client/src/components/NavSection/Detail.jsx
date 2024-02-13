@@ -1,6 +1,6 @@
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { startOfDay, endOfDay, isSameDay,format } from 'date-fns';
+import { startOfDay, isSameDay,format } from 'date-fns';
 import { it } from 'date-fns/locale';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { deleteSessionAction } from "../../redux/actions";
@@ -13,55 +13,56 @@ import { GrPrevious } from "react-icons/gr";
 const Detail = ()=>{
 
     const dispatch = useDispatch()
+    //Stato per gestire il modale
     const [show,setShow] = useState(false)
     const [selectedSession, setSelectedSession] = useState()
     const [indexPage, setIndexPage] = useState(1)
+    //Stato di partenza del indice di visualizzazione
     const [currentIndex, setCurrentIndex] = useState(0)
+    //Stato per gestire quanti elementi visualizzare per pagina
     const [selectedIndex, setSelectedIndex] = useState(5)
-    const sessions = useSelector(state=>state.sessions.content)
 
+    const sessions = useSelector(state=>state.sessions.content)
     const orderedDates = [...sessions].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    console.log(orderedDates)
+   
 
     //DAY SESSION 
-        // Raggruppa le sessioni per giorni con la somma dei secondi
+
+        //Funzione per creare un array di oggetti, in cui ogni oggetto è una sessione giornaliera
+        //Inizializzo result (che è l'accumulatore con un array vuoto)
         const sessionsByDay = orderedDates.reduce((result, session) => {
-        // Ottieni la data della sessione come oggetto Date
+        // Creo sessionDate e lo uso come "chiave" di ricerca per individuare tutti i giorni uguali
         const sessionDate = new Date(session.date);
-    
-        // Cerca il giorno corrispondente nel risultato
         const day = result.find((d) => isSameDay(sessionDate, d.startDate));
     
         if (day) {
-        // Se il giorno esiste, aggiungi la sessione
+        // Se ci esistono giorni uguali vengono "unificati" in un singolo oggetto. Siccome l'array di partenza è vuoto, si va
+        // direttamente nel blocco else per "inizializzare" il primo oggetto "day" nell'array result da cui partirà successivamente
+        // la ricerca con il find.
         day.sessions.push(session);
-        // Aggiorna la somma dei secondi
         day.totalSeconds += session.seconds;
         } else {
-        // Se il giorno non esiste, crea un nuovo giorno
+        // Se il giorno non esiste, crea un nuovo oggetto "day" con le seguenti proprietà
         result.push({
             startDate: startOfDay(sessionDate),
-            endDate: endOfDay(sessionDate),
             sessions: [session],
             totalSeconds: session.seconds,
             _id: session._id
         });
         }
-  
-    return result;
-  }, []);
+        return result;
+    }, []);
 
 
 
     const endIndex = Math.min(currentIndex + selectedIndex, sessionsByDay.length);
 
+    //Funzioni per gestire la visualizzazione delle pagine, ad ogni click delle icone, il currentIndex cambierà in base a nextIndex o prevIndex
     const handleNext = ()=>{
-        
         const nextIndex = currentIndex + selectedIndex;
         setCurrentIndex(nextIndex < sessionsByDay.length ? nextIndex : currentIndex)
         if(endIndex<sessionsByDay.length){
-
             setIndexPage(indexPage+1)
         }
     }
@@ -72,9 +73,13 @@ const Detail = ()=>{
             setIndexPage(indexPage-1)
         }
     }
-
+  //Funzione per gestire l'apparizione del modale per eliminare una sessione.
+  //Viene salvata la sessione nello stato per poterla eliminare quando si da la conferma
   const handleShowModal = (session)=>{setShow(true);setSelectedSession(session)}
   const handleCloseModal = ()=> setShow(false)
+
+  //Funzione per "dispatchare" l'action delete ed eliminare una sessione.
+  //Viene passata la sessione salvata nello stato al dispatch.
   const handleDelete = ()=>{
     dispatch(deleteSessionAction(selectedSession))
     setShow(false)
