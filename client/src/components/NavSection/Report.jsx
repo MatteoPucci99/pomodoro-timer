@@ -9,10 +9,12 @@ import Detail from "./Detail"
 const Report = (props)=>{
 
     const dispatch = useDispatch()
+    //Stato per gestire la visualizzazione del componente Summary o Detail e l'applicazione dello stile clickedReportButton
     const [isSelected, setIsSelected] = useState('Summary')
 
     const handleSelectedButton = (input)=>setIsSelected(input)
 
+    //Ogni volta che si apre il modale (prop passata da NavSection) lo useEffect aggiorna i dati.
     useEffect(()=>{
         dispatch(getSessionsAction())
     },[props.modalState])
