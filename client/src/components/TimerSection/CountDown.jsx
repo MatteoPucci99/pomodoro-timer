@@ -11,8 +11,9 @@ const CountDown = (props)=>{
     const dispatch = useDispatch()
     const [minutes, setMinutes] = useState(props.timerSettings);
     const [seconds, setSeconds] = useState(0);
+    //Stato per gestire lo stato di Start e Pause del timer insieme alla variazione di stile nel momento in cui si preme il bottone
     const [isRunning, setIsRunning] = useState(false)
-    const [isPressed, setIsPressed] = useState(false)
+    //Oggetto session da mandare al server
     const [session, setSession] = useState(
       {
         date: new Date(),
@@ -20,9 +21,9 @@ const CountDown = (props)=>{
       }
     )
 
-
+    //Quando in Timer si passa da Pomodoro alle fasi di break, vengono aggiornati i minuti e i secondi. 
     useEffect(() => {
-      setMinutes(parseInt(props.timerSettings));
+      setMinutes((props.timerSettings));
       setSeconds(0);
     }, [props.timerSettings]);
   
@@ -36,10 +37,9 @@ const CountDown = (props)=>{
           });
           if (seconds === 0) {
             if (minutes === 0) {
+              //Quando termina il timer fa queste cose
               clearInterval(timer);
-              // Fai qualcosa quando il timer raggiunge zero
               props.handleSelected('ShortBreak')
-              setIsPressed(false)
               setIsRunning(false)
               setMinutes(props.timerSettings)
               setSeconds(0)
@@ -57,27 +57,27 @@ const CountDown = (props)=>{
       return () => clearInterval(timer);
     }, [isRunning, minutes, seconds]);
 
-  
+    //Funzione per mostrare i secondi nel formato 00 per numeri minori di 10
     const formatTime = (value) => (value < 10 ? `0${value}` : value);
     const handleTimer = () => setIsRunning(!isRunning);
-    const handlePressButton = ()=> setIsPressed(!isPressed)
+    //Funzione per resettare lo stato ogni qual volta viene dispatchato l'azione saveSessionAction
     const handleTrackReset = ()=>{
       setSession({
         date: new Date(),
         seconds: 0
       });
     }
+    //Funzione per gestire il click del timer
     const handleClickTimer = ()=>{
-      if(isPressed && props.option === 'Pomodoro'){
+      if(isRunning && props.option === 'Pomodoro'){
         console.log('Invio i dati al server !')
         dispatch(saveSessionAction(session,handleTrackReset))
 
       }
     }
-
+    //Funzione per gestire il passaggio rapido alla pausa mentre il timer è attivo
     const handleArrowSwitch = ()=>{
       props.handleSelected('ShortBreak')
-      setIsPressed(false)
       setIsRunning(false)
       dispatch(saveSessionAction(session, handleTrackReset))
     }
@@ -92,7 +92,7 @@ const CountDown = (props)=>{
                     <span id="timerContent">{`${formatTime(minutes)}:${formatTime(seconds)}`}</span>
                 </Col>
                 <Col className='position-relative'>
-                    <button onClick={()=>{handleTimer();handlePressButton();handleClickTimer()}} id="buttonTimer" style={{borderBottom: isPressed ? 'none' : '6px solid #cecece'}}>
+                    <button onClick={()=>{handleTimer();handleClickTimer()}} id="buttonTimer" style={{borderBottom: isRunning ? 'none' : '6px solid #cecece'}}>
                         {isRunning ? 'PAUSE' : 'START'}
                     </button>
                     {isRunning && props.option === 'Pomodoro' && (<IoPlaySkipForward style={{fontSize:'2em', cursor:'pointer'}} className='position-absolute ms-5 top-50' onClick={handleArrowSwitch} />)}
