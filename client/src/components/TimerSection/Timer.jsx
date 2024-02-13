@@ -12,7 +12,7 @@ const Timer = ()=>{
     const [selected,setSelected] = useState('Pomodoro')
     const [timerSettings, setTimerSettings] = useState(settings.Pomodoro)
 
-
+    //Setto il timerSettings al variare delle opzioni (Pomodoro, ShortBreak, LongBreak) in base ai settings che provengono dallo stato Redux.
     useEffect(() => {
         if (selected === "Pomodoro") {
           setTimerSettings(settings.Pomodoro);
@@ -23,11 +23,7 @@ const Timer = ()=>{
         }
       }, [selected, settings]);
 
- 
-    
-
-
-
+    //Funzioni per gestire rispettivamente gli stati settings e selected in base al opzione clickata.
     const handleSettings = (input) => setTimerSettings(input)
     const handleSelected = (input) => setSelected(input)
 
